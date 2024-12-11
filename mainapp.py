@@ -3,7 +3,7 @@ import sqlite3
 import os
 
 app = Flask(__name__)
-DB_FILE = "scan_results.db"
+DB_FILE = "static_analysis.db"
 
 # Initialize the database
 def init_db():

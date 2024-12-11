@@ -189,7 +189,7 @@ class StaticAnalyzer:
         except Exception as e:
             print(f"Error sending report: {e}")
 
-if __name__ == "__main__":
+if __name__ == "__main__":  
     project_folder = "D:/MyAndroidProjects"
 
     analyzer = StaticAnalyzer(project_folder)
