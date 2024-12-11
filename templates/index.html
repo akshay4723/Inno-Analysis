@@ -5,47 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Static Analysis Results</title>
     <style>
+      :root {
+        --bg-color: #ffffff;
+        --text-color: #000000;
+        --header-bg-color: #f4f4f4;
+        --table-border-color: #ddd;
+        --button-bg-color: #e0e0e0;
+        --button-hover-bg-color: #c0c0c0;
+      }
+
+      [data-theme="dark"] {
+        --bg-color: #181818;
+        --text-color: #ffffff;
+        --header-bg-color: #282828;
+        --table-border-color: #444;
+        --button-bg-color: #3a3a3a;
+        --button-hover-bg-color: #555;
+      }
+
       body {
         font-family: Arial, sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        margin: 0;
+        padding: 0;
       }
+
       table {
         width: 100%;
         border-collapse: collapse;
         margin-top: 20px;
       }
+
       th,
       td {
-        border: 1px solid #ddd;
+        border: 1px solid var(--table-border-color);
         padding: 8px;
         text-align: left;
       }
+
       th {
-        background-color: #f4f4f4;
+        background-color: var(--header-bg-color);
+      }
+
+      .theme-toggle {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background-color: var(--button-bg-color);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .theme-toggle:hover {
+        background-color: var(--button-hover-bg-color);
+      }
+
+      .theme-toggle-icon {
+        font-size: 20px;
       }
     </style>
   </head>
   <body>
+    <button class="theme-toggle" id="themeToggle">
+      <span class="theme-toggle-icon">🌙</span>
+    </button>
+
     <div
       style="
         font-family: 'Segoe UI', Roboto, Arial, sans-serif;
         margin: 0;
         padding: 0;
-        background-color: #d3cece;
-        color: black;
+        background-color: var(--header-bg-color);
+        color: var(--text-color);
         text-align: center;
         font-size: 1.5em;
         font-weight: bold;
-        border-left: 3px solid #0d0d0d;
-        border-right: 3px solid #0d0d0d;
-        border-top: 3px solid #0d0d0d;
-        border-bottom: 3px solid #0d0d0d;
-
+        border: 3px solid var(--text-color);
         display: flex;
         justify-content: space-between;
         flex-direction: row-reverse;
         padding-top: 10px;
         padding-bottom: 10px;
-        text-align: center;
       "
     >
       <div></div>
@@ -55,7 +102,7 @@
             font-family: 'Segoe UI', Roboto, Arial, sans-serif;
             margin: 0;
             padding: 0;
-            color: black;
+            color: var(--text-color);
             text-align: center;
             font-size: 1.2em;
             line-height: 0%;
@@ -67,7 +114,7 @@
         </h1>
         <p
           style="
-            color: black;
+            color: var(--text-color);
             font-size: medium;
             font-size: 0.9em;
             margin-top: 32px;
@@ -91,12 +138,11 @@
             background-color: #afacac;
           "
         />
-
         <i
           style="
             font-family: arial, sans-serif;
-            background-color: #d3cece;
-            color: black;
+            background-color: var(--header-bg-color);
+            color: var(--text-color);
             font-size: 1em;
             font-weight: semibold;
             text-align: justify-items;
@@ -120,6 +166,21 @@
     </table>
 
     <script>
+      // Theme toggle functionality
+      const themeToggle = document.getElementById("themeToggle");
+      const body = document.body;
+
+      themeToggle.addEventListener("click", () => {
+        const currentTheme = body.getAttribute("data-theme");
+        if (currentTheme === "dark") {
+          body.removeAttribute("data-theme");
+          themeToggle.innerHTML = '<span class="theme-toggle-icon">🌙</span>';
+        } else {
+          body.setAttribute("data-theme", "dark");
+          themeToggle.innerHTML = '<span class="theme-toggle-icon">☀️</span>';
+        }
+      });
+
       async function loadResults() {
         try {
           const response = await fetch("/results");
@@ -135,10 +196,10 @@
           data.vulnerabilities.forEach((vuln) => {
             const row = document.createElement("tr");
             row.innerHTML = `
-                        <td>${vuln.file}</td>
-                        <td>${vuln.vulnerability}</td>
-                        <td>${vuln.description}</td>
-                    `;
+              <td>${vuln.file}</td>
+              <td>${vuln.vulnerability}</td>
+              <td>${vuln.description}</td>
+            `;
             tableBody.appendChild(row);
           });
         } catch (error) {
