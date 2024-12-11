@@ -3,10 +3,10 @@ name: Static Code Analysis
 on:
   push:
     branches:
-      - main  # Trigger on push to the main branch
+      - master # Trigger on push to the master branch
   pull_request:
     branches:
-      - main  # Trigger on pull requests targeting the main branch
+      - master  # Trigger on pull requests targeting the master branch
 
 jobs:
   analyze:
@@ -29,8 +29,8 @@ jobs:
         pip install -r requirements.txt  # This installs Python dependencies listed in requirements.txt
 
     # Step 4: Run the Static Analysis Script
-    - name: Run Static Analysis
-      run: python static_analyzer.py  # This runs your static analysis script
+    - name: Run Flake8
+      run: flake8  # This runs your static analysis script
 
     # Step 5: Store and upload the results (optional, for analysis)
     - name: Upload Scan Results
