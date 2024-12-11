@@ -7,7 +7,6 @@
     <style>
       body {
         font-family: Arial, sans-serif;
-        margin: 20px;
       }
       table {
         width: 100%;
@@ -26,7 +25,7 @@
     </style>
   </head>
   <body>
-    <h1
+    <div
       style="
         font-family: 'Segoe UI', Roboto, Arial, sans-serif;
         margin: 0;
@@ -39,57 +38,74 @@
         border-left: 3px solid #0d0d0d;
         border-right: 3px solid #0d0d0d;
         border-top: 3px solid #0d0d0d;
-      "
-    >
-      Static Analysis Results
-    </h1>
-    <div class="logo-container">
-      <img
-        src="./logo.jpg"
-        alt="Innov Analysis Logo"
-        style="
-          width: 60px;
-          height: 60px;
-          border-radius: 60%;
-          background-color: #afacac;
-        "
-      />
-
-      <h1
-        style="
-          font-family: arial, sans-serif;
-          margin: 0;
-          padding: 0;
-          background-color: #d3cece;
-          color: black;
-
-          font-size: 1em;
-          font-weight: bold;
-          text-align: justify-items;
-          border-left: 3px solid #0d0d0d;
-          border-right: 3px solid #0d0d0d;
-        "
-      >
-        INNOV ANALYSIS
-      </h1>
-    </div>
-    <h2
-      style="
-        font-family: arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #d3cece;
-        color: black;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+        padding-top: 10px;
+        padding-bottom: 10px;
         text-align: center;
-        font-size: 1.3em;
-        font-weight: bold;
-        border-bottom: 3px solid #0d0d0d;
-        border-left: 3px solid #0d0d0d;
-        border-right: 3px solid #0d0d0d;
       "
     >
-      Scan Results
-    </h2>
+      <div></div>
+      <div>
+        <h1
+          style="
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: black;
+            text-align: center;
+            font-size: 1.2em;
+            line-height: 0%;
+            margin-top: 15px;
+            font-weight: bold;
+          "
+        >
+          Static Analysis Results
+        </h1>
+        <p
+          style="
+            color: black;
+            font-size: medium;
+            font-size: 0.9em;
+            margin-top: 32px;
+            line-height: 0%;
+            border-bottom: #0d0d0d;
+          "
+        >
+          Scan Results
+        </p>
+      </div>
+      <div
+        class="logo-container"
+        style="display: flex; margin-left: 15px; gap: 15px; margin-top: 1px"
+      >
+        <img
+          src="./logo.jpg"
+          alt="Innov Analysis Logo"
+          style="
+            width: 60px;
+            height: 60px;
+            border-radius: 60%;
+            background-color: #afacac;
+          "
+        />
+
+        <i
+          style="
+            font-family: arial, sans-serif;
+            background-color: #d3cece;
+            color: black;
+            font-size: 1em;
+            font-weight: semibold;
+            text-align: justify-items;
+          "
+        >
+          INNOV <br />
+          ANALYSIS
+        </i>
+      </div>
+    </div>
 
     <table id="resultsTable">
       <thead>
