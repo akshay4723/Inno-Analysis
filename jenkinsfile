@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        Inno-Analysis = "D:/sih/Inno-Analysis" // Define project folder path
-        static_analysis = "scan_results.db"           // Define database name
+        Project = "D:/sih/Inno-Analysis" // Define project folder path
+        Db = "scan_results.db"           // Define database name
     }
 
     stages {
