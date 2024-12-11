@@ -2,15 +2,15 @@ pipeline {
     agent any
 
     environment {
-        PROJECT_FOLDER = "D:/MyAndroidProjects" // Define project folder path
-        DB_NAME = "scan_results.db"           // Define database name
+        Inno-Analysis = "D:/sih/Inno-Analysis" // Define project folder path
+        static_analysis = "scan_results.db"           // Define database name
     }
 
     stages {
         stage('Checkout Code') {
             steps {
                 echo 'Checking out the code...'
-                git 'https://your-git-repository-url.git'
+                git 'https://github.com/akshay4723/Inno-Analysis.git'
             }
         }
 
@@ -30,7 +30,7 @@ pipeline {
                 echo 'Running static code analysis...'
                 sh '''
                 source venv/bin/activate
-                python static_analyzer.py
+                python yesmine.py
                 '''
             }
         }
