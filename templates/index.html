@@ -1,72 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Static Analysis Results</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f4f4f4;
+      }
     </style>
-</head>
-<body>
-    <h1>Static Analysis Results</h1>
-    <h2>Scan Results</h2>
+  </head>
+  <body>
+    <div class="logo-container">
+      <img src="logo.jpg" alt="Innov Analysis Logo" />
+
+      <h1
+        style="
+          font-family: 'Segoe UI', Roboto, arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #d3cece;
+          color: black;
+          text-align: center;
+          font-size: 1.5em;
+          font-weight: bold;
+          border-left: 3px solid #0d0d0d;
+          border-right: 3px solid #0d0d0d;
+          border-top: 3px solid #0d0d0d;
+        "
+      >
+        Static Analysis Results
+      </h1>
+      <h2
+        style="
+          font-family: arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #d3cece;
+          color: black;
+          text-align: center;
+          font-size: 1.3em;
+          font-weight: bold;
+          border-bottom: 3px solid #0d0d0d;
+          border-left: 3px solid #0d0d0d;
+          border-right: 3px solid #0d0d0d;
+        "
+      >
+        Scan Results
+      </h2>
+    </div>
     <table id="resultsTable">
-        <thead>
-            <tr>
-                <th>File</th>
-                <th>Vulnerability</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
+      <thead>
+        <tr>
+          <th>File</th>
+          <th>Vulnerability</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
     </table>
 
     <script>
-        async function loadResults() {
-            try {
-                const response = await fetch('/results');
-                if (!response.ok) {
-                    console.error("Failed to fetch results");
-                    return;
-                }
+      async function loadResults() {
+        try {
+          const response = await fetch("/results");
+          if (!response.ok) {
+            console.error("Failed to fetch results");
+            return;
+          }
 
-                const data = await response.json();
-                const tableBody = document.querySelector('#resultsTable tbody');
-                tableBody.innerHTML = '';
+          const data = await response.json();
+          const tableBody = document.querySelector("#resultsTable tbody");
+          tableBody.innerHTML = "";
 
-                data.vulnerabilities.forEach(vuln => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
+          data.vulnerabilities.forEach((vuln) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
                         <td>${vuln.file}</td>
                         <td>${vuln.vulnerability}</td>
                         <td>${vuln.description}</td>
                     `;
-                    tableBody.appendChild(row);
-                });
-            } catch (error) {
-                console.error("Error loading results:", error);
-            }
+            tableBody.appendChild(row);
+          });
+        } catch (error) {
+          console.error("Error loading results:", error);
         }
+      }
 
-        // Load results on page load
-        loadResults();
+      // Load results on page load
+      loadResults();
     </script>
-</body>
+  </body>
 </html>
