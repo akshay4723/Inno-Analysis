@@ -57,7 +57,20 @@ def upload_report():
 
 @app.route('/results')
 def results():
-    vulnerabilities = fetch_results()
+    # Fetch raw results from the database
+    raw_vulnerabilities = fetch_results()
+    
+    # Transform raw results into a list of dictionaries
+    vulnerabilities = [
+        {
+            "file": vuln[0],
+            "vulnerability": vuln[1],
+            "description": vuln[2]
+        } 
+        for vuln in raw_vulnerabilities
+    ]
+    
+    # Return the structured data as JSON
     return jsonify({'vulnerabilities': vulnerabilities})
 
 if __name__ == '__main__':
