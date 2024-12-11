@@ -3,10 +3,10 @@ name: Static Code Analysis
 on:
   push:
     branches:
-      - main  # Trigger on push to the main branch
+      - master # Trigger on push to the master branch
   pull_request:
     branches:
-      - main  # Trigger on pull requests targeting the main branch
+      - master  # Trigger on pull requests targeting the master branch
 
 jobs:
   analyze:
