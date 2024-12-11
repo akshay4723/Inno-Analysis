@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+
+    environment {
+        PROJECT_FOLDER = "D:/MyAndroidProjects" // Define project folder path
+        DB_NAME = "scan_results.db"           // Define database name
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                echo 'Checking out the code...'
+                git 'https://your-git-repository-url.git'
+            }
+        }
+
+        stage('Set Up Environment') {
+            steps {
+                echo 'Setting up environment...'
+                sh '''
+                python3 -m venv venv
+                source venv/bin/activate
+                pip install -r requirements.txt
+                '''
+            }
+        }
+
+        stage('Run Static Analysis') {
+            steps {
+                echo 'Running static code analysis...'
+                sh '''
+                source venv/bin/activate
+                python static_analyzer.py
+                '''
+            }
+        }
+
+        stage('Publish Report') {
+            steps {
+                echo 'Publishing report to Jenkins...'
+                archiveArtifacts artifacts: 'scan_results.db', fingerprint: true
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline completed successfully.'
+        }
+        failure {
+            echo 'Pipeline failed. Check the logs.'
+        }
+    }
+}
